@@ -1,0 +1,9 @@
+$ go mod init github.com/dkantikorn/fiber-rest-api
+$ go get -u gorm.io/gorm
+
+# Installing for gcc on laptop_windows
+    Download exe file and install on to your windows used to run gcc used in sqlite3
+    https://jmeubank.github.io/tdm-gcc/
+
+$ go get gorm.io/driver/sqlite
+$ go get github.com/gofiber/fiber/v2
