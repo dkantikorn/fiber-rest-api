@@ -130,7 +130,7 @@ func DeleteUser(c *fiber.Ctx) error {
 	}
 	//Checking for user infomation is existing
 	if err := findUser(id, &user); err != nil {
-		return c.Status(utilities.CODE_NOT_FOUND).JSON(err.Error())
+		return c.Status(utilities.CODE_NOT_FOUND).JSON(utilities.ReturnResponseMessageUser("FAILED", err.Error(), entities.User{}))
 	}
 	//Delete and tracking for error
 	if err := database.Database.DB.Delete(&user).Error; err != nil {

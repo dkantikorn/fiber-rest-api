@@ -8,12 +8,13 @@ POST {{baseURL}}{{apiVersion}}{{apiURL}}/users
 Content-Type: application/json
 
 {
-    "first_name": "Harryxx",
+    "first_name": "Mochi",
     "last_name": "Porter"
 }
 
 ### Get all for user infomation
 GET {{baseURL}}{{apiVersion}}{{apiURL}}/users
+
 #### Get for user infomation with id parameter
 GET {{baseURL}}{{apiVersion}}{{apiURL}}/users/5
 
@@ -23,8 +24,36 @@ Content-Type: application/json
 
 {
     "first_name": "Peter EDIT",
-    "lsat_name": "Pet EDIT"
+    "last_name": "Pet EDIT"
 }
 
 ### Delete for user information
-DELETE {{baseURL}}{{apiVersion}}{{apiURL}}/users/2
+DELETE {{baseURL}}{{apiVersion}}{{apiURL}}/users/5
+
+### Create Product
+POST {{baseURL}}{{apiVersion}}{{apiURL}}/products
+Content-Type: application/json
+
+{
+    "name": "Tata",
+    "serial_number": "1235644424"
+}
+
+### Get all products
+GET {{baseURL}}{{apiVersion}}{{apiURL}}/products
+
+### Get Product 
+GET {{baseURL}}{{apiVersion}}{{apiURL}}/products/1
+
+### Edit Product 
+PUT {{baseURL}}{{apiVersion}}{{apiURL}}/products/1
+Content-Type: application/json
+
+{
+    "name" : "TOYOTA EDIT",
+    "serial_number": "111111111"
+}
+
+
+### Delete Product 
+DELETE {{baseURL}}{{apiVersion}}{{apiURL}}/products/1

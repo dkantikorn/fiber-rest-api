@@ -25,13 +25,25 @@ func SetupRoutes(app *fiber.App) {
 	//Welcome endpoint
 	app.Get(apiVersion+apiURL, welcome)
 
-	user := app.Group(apiVersion + apiURL + "/users")
+	//==============================================================================
 	//User endpoints
+	//==============================================================================
+	user := app.Group(apiVersion + apiURL + "/users")
 	user.Post("/", routes.CreateUser)
 	user.Get("/", routes.GetUsers)
 	user.Get("/:id", routes.GetUser)
 	user.Put("/:id", routes.UpdateUser)
 	user.Delete("/:id", routes.DeleteUser)
+
+	//==============================================================================
+	//Product enpoints
+	//==============================================================================
+	product := app.Group(apiVersion + apiURL + "/products")
+	product.Post("/", routes.CreateProduct)
+	product.Get("/", routes.GetProducts)
+	product.Get("/:id", routes.GetProduct)
+	product.Put("/:id", routes.UpdateProduct)
+	product.Delete("/:id", routes.DeleteProduct)
 }
 
 func main() {
