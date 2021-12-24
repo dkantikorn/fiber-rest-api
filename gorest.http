@@ -1,0 +1,30 @@
+@baseURL = http://localhost:3000
+@apiURL = /api
+@apiVersion = /v1
+###
+http://localhost:3000/v1/api
+### Create for users
+POST {{baseURL}}{{apiVersion}}{{apiURL}}/users
+Content-Type: application/json
+
+{
+    "first_name": "Harryxx",
+    "last_name": "Porter"
+}
+
+### Get all for user infomation
+GET {{baseURL}}{{apiVersion}}{{apiURL}}/users
+#### Get for user infomation with id parameter
+GET {{baseURL}}{{apiVersion}}{{apiURL}}/users/5
+
+### Update for user infomation
+PUT {{baseURL}}{{apiVersion}}{{apiURL}}/users/5
+Content-Type: application/json
+
+{
+    "first_name": "Peter EDIT",
+    "lsat_name": "Pet EDIT"
+}
+
+### Delete for user information
+DELETE {{baseURL}}{{apiVersion}}{{apiURL}}/users/2

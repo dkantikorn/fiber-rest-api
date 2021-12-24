@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/dkantikorn/fiber-rest-api/database/models"
+	"github.com/dkantikorn/fiber-rest-api/models"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -27,7 +27,7 @@ func ConnectDatabase() {
 	log.Println("Connected to the database successfully")
 	db.Logger = logger.Default.LogMode(logger.Info)
 
-	log.Println("Running for daatbase migration")
+	log.Println("Running for datbase migration")
 
 	// migration models
 	db.AutoMigrate(&models.User{}, &models.Product{}, &models.Order{})
