@@ -1,0 +1,501 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/api": {
+            "get": {
+                "description": "Geting for welcome endpoint",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Welcome"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/api/orders": {
+            "get": {
+                "description": "Get all order information",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "order"
+                ],
+                "summary": "Get all order information",
+                "responses": {
+                    "200": {
+                        "description": "array of order with success message",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/entities.Order"
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "null order entities with error message",
+                        "schema": {
+                            "$ref": "#/definitions/entities.Order"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create for order",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "order"
+                ],
+                "summary": "Insert order info into the database",
+                "parameters": [
+                    {
+                        "description": "productId",
+                        "name": "product_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "userId",
+                        "name": "user_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "order data with success message",
+                        "schema": {
+                            "$ref": "#/definitions/entities.Order"
+                        }
+                    },
+                    "500": {
+                        "description": "order null data with failure message",
+                        "schema": {
+                            "$ref": "#/definitions/entities.Order"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/api/orders/{id}": {
+            "get": {
+                "description": "Get for order information",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "order"
+                ],
+                "summary": "Get for order information",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "order ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "order entities with success message",
+                        "schema": {
+                            "$ref": "#/definitions/entities.Order"
+                        }
+                    },
+                    "201": {
+                        "description": "order entities with null value and error message",
+                        "schema": {
+                            "$ref": "#/definitions/entities.Order"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/api/products": {
+            "get": {
+                "description": "Get all product information",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "Get all product information",
+                "responses": {
+                    "200": {
+                        "description": "array of product with success message",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/entities.Product"
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "null product entities with error message",
+                        "schema": {
+                            "$ref": "#/definitions/entities.Product"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create for product",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "Insert product info into the database",
+                "parameters": [
+                    {
+                        "description": "ProductName",
+                        "name": "name",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "ProductSerialNumber",
+                        "name": "serial_number",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "product data with success message",
+                        "schema": {
+                            "$ref": "#/definitions/entities.Product"
+                        }
+                    },
+                    "500": {
+                        "description": "product null data with failure message",
+                        "schema": {
+                            "$ref": "#/definitions/entities.Product"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/api/products/{id}": {
+            "get": {
+                "description": "Get for product information",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "Get for product information",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Product ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "product entities with success message",
+                        "schema": {
+                            "$ref": "#/definitions/entities.Product"
+                        }
+                    },
+                    "201": {
+                        "description": "product entities with null value and error message",
+                        "schema": {
+                            "$ref": "#/definitions/entities.Product"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "Update for product infomation",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ProductID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "ProductName",
+                        "name": "name",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "ProductSerialNumber",
+                        "name": "serial_number",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "product entities with success message",
+                        "schema": {
+                            "$ref": "#/definitions/entities.Product"
+                        }
+                    },
+                    "201": {
+                        "description": "product entities with error message",
+                        "schema": {
+                            "$ref": "#/definitions/entities.Product"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "Delete for the product",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ProductID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "product entities with success message",
+                        "schema": {
+                            "$ref": "#/definitions/entities.Product"
+                        }
+                    },
+                    "201": {
+                        "description": "product entities with error message",
+                        "schema": {
+                            "$ref": "#/definitions/entities.Product"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/api/users": {
+            "get": {
+                "description": "Get all existing of users",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.User"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create new infomation of user",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.User"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/api/users/{id}": {
+            "get": {
+                "description": "Get for user details",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entities.User"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update user information",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "parameters": [
+                    {
+                        "description": "FirstName",
+                        "name": "first_name",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "LastName",
+                        "name": "last_name",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entities.User"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete for user infomation",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "json"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "entities.Order": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "product": {
+                    "$ref": "#/definitions/entities.Product"
+                },
+                "user": {
+                    "$ref": "#/definitions/entities.User"
+                }
+            }
+        },
+        "entities.Product": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "serial_number": {
+                    "type": "string"
+                }
+            }
+        },
+        "entities.User": {
+            "type": "object",
+            "properties": {
+                "first_name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "last_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.User": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "first_name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "last_name": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

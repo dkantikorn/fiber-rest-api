@@ -7,3 +7,8 @@ $ go get -u gorm.io/gorm
 
 $ go get gorm.io/driver/sqlite
 $ go get github.com/gofiber/fiber/v2
+
+# Install swagger
+$ go get -u github.com/swaggo/swag/cmd/swag
+$ swag init
+$ go get -u github.com/arsmn/fiber-swagger/v2

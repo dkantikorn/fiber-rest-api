@@ -47,7 +47,7 @@ func GetUsers(c *fiber.Ctx) error {
 }
 
 //Function making for find the user with parameter is us id
-func findUser(id int, user *models.User) error {
+func FindUser(id int, user *models.User) error {
 	database.Database.DB.Find(&user, "id = ?", id)
 	if user.ID == 0 {
 		return errors.New("user dose not exist")
@@ -59,7 +59,7 @@ func findUser(id int, user *models.User) error {
 //@Tags user
 //@Accept application/json
 //@Product application/json
-//@Success 200 {object} User
+//@Success 200 {object} entities.User
 //@router /v1/api/users/{id} [get]
 func GetUser(c *fiber.Ctx) error {
 	id, err := c.ParamsInt("id")
@@ -67,7 +67,7 @@ func GetUser(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(utilities.CODE_FAILED).JSON(utilities.ReturnResponseMessageUser("FAILED", "Please ensure that id: parameter is integer", entities.User{}))
 	}
-	if err := findUser(id, &user); err != nil {
+	if err := FindUser(id, &user); err != nil {
 		return c.Status(utilities.CODE_NOT_FOUND).JSON(utilities.ReturnResponseMessageUser("FAILED", err.Error(), entities.User{}))
 	}
 	responseUser := utilities.CreateResponseUser(user)
@@ -81,7 +81,7 @@ func GetUser(c *fiber.Ctx) error {
 //@Product application/json
 //@Param first_name body string true "FirstName"
 //@Param last_name body string true "LastName"
-//@Success 200 {object} User
+//@Success 200 {object} entities.User
 //@router /v1/api/users/{id} [put]
 func UpdateUser(c *fiber.Ctx) error {
 	var user models.User
@@ -91,7 +91,7 @@ func UpdateUser(c *fiber.Ctx) error {
 		return c.Status(utilities.CODE_FAILED).JSON(utilities.ReturnResponseMessageUser("FAILED", "Please ensure that id: parameter is integer", entities.User{}))
 	}
 	//Check for existing user on the database
-	if err := findUser(id, &user); err != nil {
+	if err := FindUser(id, &user); err != nil {
 		return c.Status(utilities.CODE_NOT_FOUND).JSON(utilities.ReturnResponseMessageUser("FAILED", err.Error(), entities.User{}))
 	}
 
@@ -129,7 +129,7 @@ func DeleteUser(c *fiber.Ctx) error {
 		return c.Status(utilities.CODE_FAILED).JSON(utilities.ReturnResponseMessageUser("FAILED", "Please ensure that id: parameter is integer", entities.User{}))
 	}
 	//Checking for user infomation is existing
-	if err := findUser(id, &user); err != nil {
+	if err := FindUser(id, &user); err != nil {
 		return c.Status(utilities.CODE_NOT_FOUND).JSON(utilities.ReturnResponseMessageUser("FAILED", err.Error(), entities.User{}))
 	}
 	//Delete and tracking for error

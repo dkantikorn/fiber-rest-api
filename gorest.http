@@ -54,6 +54,21 @@ Content-Type: application/json
     "serial_number": "111111111"
 }
 
-
 ### Delete Product 
 DELETE {{baseURL}}{{apiVersion}}{{apiURL}}/products/1
+
+
+### Create Order 
+POST {{baseURL}}{{apiVersion}}{{apiURL}}/orders
+Content-Type: application/json
+
+{
+    "user_id" : 11,
+    "product_id" : 3
+}
+
+### Get all Order
+GET {{baseURL}}{{apiVersion}}{{apiURL}}/orders
+
+### Get Order
+GET {{baseURL}}{{apiVersion}}{{apiURL}}/orders/1

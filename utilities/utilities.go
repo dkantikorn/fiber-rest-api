@@ -32,3 +32,16 @@ func ReturnResponseMessageProduct(status string, message string, data entities.P
 	}
 	return fiber.Map{"status": status, "message": message, "data": data}
 }
+
+//Function making for build create order response
+func CreateResponseOrder(orderModel models.Order, user entities.User, product entities.Product) entities.Order {
+	return entities.Order{ID: orderModel.ID, User: user, Product: product}
+}
+
+//Function making for build the response message for the order information
+func ReturnResponseMessageOrder(status string, message string, data entities.Order) map[string]interface{} {
+	if data.ID == 0 {
+		return fiber.Map{"status": status, "message": message, "data": nil}
+	}
+	return fiber.Map{"status": status, "message": message, "data": data}
+}

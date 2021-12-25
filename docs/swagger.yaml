@@ -1,0 +1,325 @@
+definitions:
+  entities.Order:
+    properties:
+      id:
+        type: integer
+      product:
+        $ref: '#/definitions/entities.Product'
+      user:
+        $ref: '#/definitions/entities.User'
+    type: object
+  entities.Product:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      serial_number:
+        type: string
+    type: object
+  entities.User:
+    properties:
+      first_name:
+        type: string
+      id:
+        type: integer
+      last_name:
+        type: string
+    type: object
+  models.User:
+    properties:
+      created_at:
+        type: string
+      first_name:
+        type: string
+      id:
+        type: integer
+      last_name:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /api:
+    get:
+      consumes:
+      - application/json
+      description: Geting for welcome endpoint
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      tags:
+      - Welcome
+  /v1/api/orders:
+    get:
+      consumes:
+      - application/json
+      description: Get all order information
+      responses:
+        "200":
+          description: array of order with success message
+          schema:
+            items:
+              $ref: '#/definitions/entities.Order'
+            type: array
+        "201":
+          description: null order entities with error message
+          schema:
+            $ref: '#/definitions/entities.Order'
+      summary: Get all order information
+      tags:
+      - order
+    post:
+      consumes:
+      - application/json
+      description: Create for order
+      parameters:
+      - description: productId
+        in: body
+        name: product_id
+        required: true
+        schema:
+          type: string
+      - description: userId
+        in: body
+        name: user_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: order data with success message
+          schema:
+            $ref: '#/definitions/entities.Order'
+        "500":
+          description: order null data with failure message
+          schema:
+            $ref: '#/definitions/entities.Order'
+      summary: Insert order info into the database
+      tags:
+      - order
+  /v1/api/orders/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get for order information
+      parameters:
+      - description: order ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: order entities with success message
+          schema:
+            $ref: '#/definitions/entities.Order'
+        "201":
+          description: order entities with null value and error message
+          schema:
+            $ref: '#/definitions/entities.Order'
+      summary: Get for order information
+      tags:
+      - order
+  /v1/api/products:
+    get:
+      consumes:
+      - application/json
+      description: Get all product information
+      responses:
+        "200":
+          description: array of product with success message
+          schema:
+            items:
+              $ref: '#/definitions/entities.Product'
+            type: array
+        "201":
+          description: null product entities with error message
+          schema:
+            $ref: '#/definitions/entities.Product'
+      summary: Get all product information
+      tags:
+      - product
+    post:
+      consumes:
+      - application/json
+      description: Create for product
+      parameters:
+      - description: ProductName
+        in: body
+        name: name
+        required: true
+        schema:
+          type: string
+      - description: ProductSerialNumber
+        in: body
+        name: serial_number
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: product data with success message
+          schema:
+            $ref: '#/definitions/entities.Product'
+        "500":
+          description: product null data with failure message
+          schema:
+            $ref: '#/definitions/entities.Product'
+      summary: Insert product info into the database
+      tags:
+      - product
+  /v1/api/products/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: ProductID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: product entities with success message
+          schema:
+            $ref: '#/definitions/entities.Product'
+        "201":
+          description: product entities with error message
+          schema:
+            $ref: '#/definitions/entities.Product'
+      summary: Delete for the product
+      tags:
+      - product
+    get:
+      consumes:
+      - application/json
+      description: Get for product information
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: product entities with success message
+          schema:
+            $ref: '#/definitions/entities.Product'
+        "201":
+          description: product entities with null value and error message
+          schema:
+            $ref: '#/definitions/entities.Product'
+      summary: Get for product information
+      tags:
+      - product
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: ProductID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: ProductName
+        in: body
+        name: name
+        required: true
+        schema:
+          type: string
+      - description: ProductSerialNumber
+        in: body
+        name: serial_number
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: product entities with success message
+          schema:
+            $ref: '#/definitions/entities.Product'
+        "201":
+          description: product entities with error message
+          schema:
+            $ref: '#/definitions/entities.Product'
+      summary: Update for product infomation
+      tags:
+      - product
+  /v1/api/users:
+    get:
+      consumes:
+      - application/json
+      description: Get all existing of users
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.User'
+            type: array
+      tags:
+      - user
+    post:
+      consumes:
+      - application/json
+      description: Create new infomation of user
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.User'
+            type: array
+      tags:
+      - user
+  /v1/api/users/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete for user infomation
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: json
+      tags:
+      - user
+    get:
+      consumes:
+      - application/json
+      description: Get for user details
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.User'
+      tags:
+      - user
+    put:
+      consumes:
+      - application/json
+      description: Update user information
+      parameters:
+      - description: FirstName
+        in: body
+        name: first_name
+        required: true
+        schema:
+          type: string
+      - description: LastName
+        in: body
+        name: last_name
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.User'
+      tags:
+      - user
+swagger: "2.0"

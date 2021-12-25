@@ -13,3 +13,10 @@ type Product struct {
 	Name         string `json:"name"`
 	SerialNumber string `json:"serial_number"`
 }
+
+//Order struct entities
+type Order struct {
+	ID      uint    `json:"id"`
+	User    User    `json:"user"`
+	Product Product `json:"product"`
+}

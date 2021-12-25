@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 
+	swagger "github.com/arsmn/fiber-swagger/v2"
 	"github.com/dkantikorn/fiber-rest-api/database"
 	"github.com/dkantikorn/fiber-rest-api/routes"
 	"github.com/gofiber/fiber/v2"
@@ -25,6 +26,9 @@ func SetupRoutes(app *fiber.App) {
 	//Welcome endpoint
 	app.Get(apiVersion+apiURL, welcome)
 
+	//Swagger endpoint making for API document
+	app.Get("/v1/api/swagger/*", swagger.Handler)
+
 	//==============================================================================
 	//User endpoints
 	//==============================================================================
@@ -44,6 +48,15 @@ func SetupRoutes(app *fiber.App) {
 	product.Get("/:id", routes.GetProduct)
 	product.Put("/:id", routes.UpdateProduct)
 	product.Delete("/:id", routes.DeleteProduct)
+
+	//==============================================================================
+	//Order enpoints
+	//==============================================================================
+	order := app.Group(apiVersion + apiURL + "/orders")
+	order.Post("/", routes.CreateOrder)
+	order.Get("/", routes.GetOrders)
+	order.Get("/:id", routes.GetOrder)
+
 }
 
 func main() {
