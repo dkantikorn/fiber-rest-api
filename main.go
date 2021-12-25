@@ -7,6 +7,8 @@ import (
 	"github.com/dkantikorn/fiber-rest-api/database"
 	"github.com/dkantikorn/fiber-rest-api/routes"
 	"github.com/gofiber/fiber/v2"
+
+	_ "github.com/dkantikorn/fiber-rest-api/docs"
 )
 
 //@Description Geting for welcome endpoint
@@ -52,10 +54,10 @@ func SetupRoutes(app *fiber.App) {
 	//==============================================================================
 	//Order enpoints
 	//==============================================================================
-	order := app.Group(apiVersion + apiURL + "/orders")
-	order.Post("/", routes.CreateOrder)
-	order.Get("/", routes.GetOrders)
-	order.Get("/:id", routes.GetOrder)
+	orderRoute := app.Group(apiVersion + apiURL + "/orders")
+	orderRoute.Post("/", routes.CreateOrder)
+	orderRoute.Get("/", routes.GetOrders)
+	orderRoute.Get("/:id", routes.GetOrder)
 
 }
 
