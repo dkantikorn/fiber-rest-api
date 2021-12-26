@@ -8,7 +8,19 @@ import (
 	"github.com/dkantikorn/fiber-rest-api/models"
 	"github.com/dkantikorn/fiber-rest-api/utilities"
 	"github.com/gofiber/fiber/v2"
+	"golang.org/x/crypto/bcrypt"
 )
+
+func FindAuthLogin(login entities.Login) (bool, error) {
+	var user models.User
+	if err := database.Database.DB.Debug().Model(&entities.User{}).Where("username = ?", login.Username).Take(&user).Error; err != nil {
+		return false, err
+	}
+	if err := models.VerifyPassword(user.Password, login.Password); err != nil && err == bcrypt.ErrMismatchedHashAndPassword {
+		return false, errors.New("Password missmatch")
+	}
+	return true, nil
+}
 
 //@Description Create new infomation of user
 //@Tags user
@@ -21,6 +33,7 @@ func CreateUser(c *fiber.Ctx) error {
 	if err := c.BodyParser(&user); err != nil {
 		return c.Status(utilities.CODE_FAILED).JSON(utilities.ReturnResponseMessageUser("FAILED", err.Error(), entities.User{}))
 	}
+
 	database.Database.DB.Create(&user)
 	responseUser := utilities.CreateResponseUser(user)
 	return c.Status(utilities.CODE_SUCCESS).JSON(utilities.ReturnResponseMessageUser("OK", "Create user successfully", responseUser))

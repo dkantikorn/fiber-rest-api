@@ -1,27 +1,44 @@
 @baseURL = http://localhost:3000
 @apiURL = /api
 @apiVersion = /v1
+@apiContentType=application/json
 ###
 http://localhost:3000/v1/api
+### User autorize
+# @name userAuth
+POST {{baseURL}}{{apiVersion}}{{apiURL}}/users/login
+Content-Type: {{apiContentType}}
+
+{
+    "username":"sarawutt.b",
+    "password":"password"
+}
+
+
 ### Create for users
 POST {{baseURL}}{{apiVersion}}{{apiURL}}/users
 Content-Type: application/json
 
 {
-    "first_name": "Mochi",
-    "last_name": "Porter"
+    "username":"golange",
+    "password":"password",
+    "first_name": "Fiber",
+    "last_name": "Last",
+    "email": "fiber"
 }
+#### Variable Response
+@accessToken = {{userAuth.response.body.$.access_token}}
 
 ### Get all for user infomation
 GET {{baseURL}}{{apiVersion}}{{apiURL}}/users
-
+Authorization: Bearer {{accessToken}}
 #### Get for user infomation with id parameter
 GET {{baseURL}}{{apiVersion}}{{apiURL}}/users/5
-
+Authorization: Bearer {{accessToken}}
 ### Update for user infomation
 PUT {{baseURL}}{{apiVersion}}{{apiURL}}/users/5
 Content-Type: application/json
-
+Authorization: Bearer {{accessToken}}
 {
     "first_name": "Peter EDIT",
     "last_name": "Pet EDIT"

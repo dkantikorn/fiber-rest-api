@@ -1,12 +1,23 @@
 $ go mod init github.com/dkantikorn/fiber-rest-api
 $ go get -u gorm.io/gorm
 
+## Install for go env file
+$ go get github.com/joho/godotenv
+
+## Install for go JWt 
+$ go get -u github.com/gofiber/jwt/v3
+$ go get -u github.com/golang-jwt/jwt/v4
+
 # Installing for gcc on laptop_windows
     Download exe file and install on to your windows used to run gcc used in sqlite3
     https://jmeubank.github.io/tdm-gcc/
 
 $ go get gorm.io/driver/sqlite
 $ go get github.com/gofiber/fiber/v2
+
+# install for bcrypt
+$ go get golang.org/x/crypto/bcrypt
+
 
 # Install swagger
 $ go get -u github.com/swaggo/swag/cmd/swag

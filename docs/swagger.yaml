@@ -17,6 +17,13 @@ definitions:
       serial_number:
         type: string
     type: object
+  entities.Token:
+    properties:
+      access_token:
+        type: string
+      refresh_token:
+        type: string
+    type: object
   entities.User:
     properties:
       first_name:
@@ -30,12 +37,38 @@ definitions:
     properties:
       created_at:
         type: string
+      email:
+        maxLength: 255
+        minLength: 3
+        type: string
       first_name:
+        maxLength: 255
+        minLength: 3
         type: string
       id:
         type: integer
       last_name:
+        maxLength: 255
+        minLength: 3
         type: string
+      password:
+        maxLength: 255
+        minLength: 32
+        type: string
+      picture_path:
+        type: string
+      updated_at:
+        type: string
+      username:
+        maxLength: 50
+        minLength: 5
+        type: string
+    required:
+    - email
+    - first_name
+    - last_name
+    - password
+    - username
     type: object
 info:
   contact: {}
@@ -320,6 +353,37 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/entities.User'
+      tags:
+      - user
+  /v1/api/users/login:
+    post:
+      consumes:
+      - application/json
+      description: User authorization
+      parameters:
+      - description: Username
+        in: body
+        name: username
+        required: true
+        schema:
+          type: string
+      - description: Password
+        in: body
+        name: password
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entities.Token'
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
       tags:
       - user
 swagger: "2.0"
